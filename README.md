@@ -1,7 +1,7 @@
 # Capstone Project: Bug Beading
 
 
-**Summary:**
+## Summary:
 
 A website created for the small business Bug Beading, it is a standard
 website based on ASP.NET Razor Pages with a supervised learning ai embedded. 
