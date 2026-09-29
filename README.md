@@ -1,1 +1,1 @@
-# Capstone-Bug-Beading
+# Capstone Project: Bug Beading
