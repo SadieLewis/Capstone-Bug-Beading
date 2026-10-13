@@ -1,0 +1,44 @@
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 14px;
+}
+
+button{
+    padding-top: 1vh;
+    padding-bottom:1vh;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+h1{
+  padding: 2vh;
+  font-family: "Copperplate", fantasy;
+  font-size: 50px;
+  padding-right: 3vh;
+  border-bottom: 3vh solid #870101;
+}
+
+h2 {
+    padding: 2vh;
+    font-family: "Copperplate", fantasy;
+    font-size: 30px;
+    padding-right: 3vh;
+    border-bottom: 2vh solid #330101;
+}
+
+h3 {
+    padding: 2vh;
+    font-family: "Copperplate", fantasy;
+    font-size: 20px;
+    border-bottom: 1vh solid #018701;
+}
+p {
+    font-family: "Georgia", serif;
+    font-size: 16px;
+}
+a{
+    font-family: "Georgia", serif;
+}
