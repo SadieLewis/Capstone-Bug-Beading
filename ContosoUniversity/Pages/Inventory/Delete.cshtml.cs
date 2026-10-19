@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace ContosoUniversity.Pages.Students
+namespace ContosoUniversity.Pages.Inventory
 {
     public class DeleteModel : PageModel
     {

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.Pages.Students
+namespace ContosoUniversity.Pages.Inventory
 {
     public class IndexModel : PageModel
 {
