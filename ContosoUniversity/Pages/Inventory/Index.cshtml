@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Inventory";
 }
-<!-- figure out why pages aren't connecting right -->
+<!-- figure out why pages aren't connecting right, add in admin log in?(model after seed library perhaps) -->
 <div class="inventory-page container my-4">
     <section class="gallery-panel">
         <h1 class="text-center mb-4">Product Inventory</h1>
@@ -26,7 +26,7 @@
                 <input type="radio" name="sortOrder" value="Type" checked="@(Model.CurrentSort == "Type")" />
                 Type
             </label>
-            <!-- fix this -->
+            <!-- fix this sorting issue, adjust in .cs file -->
             <label>
                 <input type="radio" name="sortOrder"value="Color"checked="@(Model.CurrentSort == "PriceDesc")" />
                 Price
