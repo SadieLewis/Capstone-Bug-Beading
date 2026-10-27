@@ -1,10 +1,10 @@
 @page
-@model ContosoUniversity.Pages.Inventory.IndexModel
+@model BugBeading.Pages.Inventory.IndexModel
 
 @{
     ViewData["Title"] = "Inventory";
 }
-
+<!-- figure out why pages aren't connecting right -->
 <div class="inventory-page container my-4">
     <section class="gallery-panel">
         <h1 class="text-center mb-4">Product Inventory</h1>
@@ -16,7 +16,7 @@
                    name="SearchString"
                    value="@Model.CurrentFilter"
                    class="form-control" />
-            <button type="submit" class="btn btn-bb">Search</button>
+            <button type="submit" class="btn btn-bb">(Search is case-sensitive)</button>
         </form>
         <form method="get" asp-page="./Index"
               class="inventory-sort mb-4">
@@ -26,13 +26,10 @@
                 <input type="radio" name="sortOrder" value="Type" checked="@(Model.CurrentSort == "Type")" />
                 Type
             </label>
+            <!-- fix this -->
             <label>
-                <input type="radio" name="sortOrder"value="Color"checked="@(Model.CurrentSort == "Color")" />
-                Color
-            </label>
-            <label>
-                <input type="radio" name="sortOrder" value="Metal" checked="@(Model.CurrentSort == "Metal")" />
-                Metal
+                <input type="radio" name="sortOrder"value="Color"checked="@(Model.CurrentSort == "PriceDesc")" />
+                Price
             </label>
             <label>
                 <input type="radio" name="sortOrder" value="Newest" checked="@(Model.CurrentSort == "Newest")" />
@@ -42,8 +39,8 @@
                 Apply
             </button>
         </form>
-        <div class="row g-3">
-            @foreach (var item in Model.Students)
+        <div class="row g-4">
+            @foreach (var item in Model.Products)
             {
                 <div class="col-12 col-sm-6 col-lg-4">
                     <a asp-page="./Index"
@@ -51,21 +48,40 @@
                        asp-route-SearchString="@Model.CurrentFilter"
                        asp-route-sortOrder="@Model.CurrentSort"
                        class="product-card-link">
-
-                        <article class="product-card">
-                            <h2 class="product-card-title">
-                                @item.FirstMidName
-                            </h2>
-
-                            <p class="product-card-age">
-                                @item.Age
-                            </p>
+                       <article class="product-card h-100">
+                            <div class="product-card-image-container">  
+                                @if (!string.IsNullOrWhiteSpace(item.ImageUrl)){
+                                    <img src="@item.ImageUrl"
+                                            alt="@item.Name"
+                                            class="product-card-image" />
+                                }
+                                else
+                                {
+                                    <div class="product-card-image-placeholder">
+                                        <span>No image available</span>
+                                    </div>
+                                }
+                            </div>
+                            <div class="product-card-content">
+                                <h2 class="product-card-title">
+                                    @item.Name
+                                </h2>
+                                <p class="product-card-type">
+                                    @(!string.IsNullOrWhiteSpace(item.ProductType)
+                                        ? item.ProductType
+                                        : "Uncategorized")
+                                </p>
+                                <p class="product-card-price">
+                                    @item.Price.ToString("C")
+                                </p>
+                                <a asp-page="./Details">See Details</a>
+                            </div>
                         </article>
                     </a>
                 </div>
             }
         </div>
-        @if (!Model.Students.Any())
+        @if (!Model.Products.Any())
         {
             <p class="text-center py-4">
                 No products found.

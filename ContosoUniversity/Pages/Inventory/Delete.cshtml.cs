@@ -1,4 +1,4 @@
-using ContosoUniversity.Models;
+using BugBeading.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -6,14 +6,14 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace ContosoUniversity.Pages.Inventory
+namespace BugBeading.Pages.Inventory
 {
     public class DeleteModel : PageModel
     {
-        private readonly ContosoUniversity.Data.SchoolContext _context;
+        private readonly BugBeading.Data.InventoryContext _context;
         private readonly ILogger<DeleteModel> _logger;
 
-        public DeleteModel(ContosoUniversity.Data.SchoolContext context,
+        public DeleteModel(BugBeading.Data.InventoryContext context,
                            ILogger<DeleteModel> logger)
         {
             _context = context;
@@ -21,7 +21,7 @@ namespace ContosoUniversity.Pages.Inventory
         }
 
         [BindProperty]
-        public Student Student { get; set; }
+        public Product Product { get; set; }
         public string ErrorMessage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
@@ -31,19 +31,16 @@ namespace ContosoUniversity.Pages.Inventory
                 return NotFound();
             }
 
-            Student = await _context.Students
+            var product = await _context.Products
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(p => p.ID == id.Value);
 
-            if (Student == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = String.Format("Delete {ID} failed. Try again", id);
-            }
+            Product = product;
 
             return Page();
         }
@@ -55,25 +52,35 @@ namespace ContosoUniversity.Pages.Inventory
                 return NotFound();
             }
 
-            var student = await _context.Students.FindAsync(id);
+            var product = await _context.Products
+                .FirstOrDefaultAsync(p => p.ID == id.Value);
 
-            if (student == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
             try
             {
-                _context.Students.Remove(student);
+                _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
+
                 return RedirectToPage("./Index");
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError(ex, ErrorMessage);
+                _logger.LogError(
+                    ex,
+                    "Unable to delete product with ID {ProductId}.",
+                    id.Value);
 
-                return RedirectToAction("./Delete",
-                                     new { id, saveChangesError = true });
+                Product = product;
+
+                ErrorMessage =
+                    "This product could not be deleted. " +
+                    "It may be referenced by an existing order.";
+
+                return Page();
             }
         }
     }

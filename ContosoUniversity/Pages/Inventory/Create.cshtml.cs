@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ContosoUniversity.Data;
-using ContosoUniversity.Models;
+using BugBeading.Data;
+using BugBeading.Models;
 
-namespace ContosoUniversity.Pages.Inventory
+namespace BugBeading.Pages.Inventory
 {
     public class CreateModel : PageModel
     {
-        private readonly ContosoUniversity.Data.SchoolContext _context;
+        private readonly BugBeading.Data.InventoryContext _context;
 
-        public CreateModel(ContosoUniversity.Data.SchoolContext context)
+        public CreateModel(BugBeading.Data.InventoryContext context)
         {
             _context = context;
         }
@@ -25,22 +25,20 @@ namespace ContosoUniversity.Pages.Inventory
         }
 
         [BindProperty]
-        public Student Student { get; set; } = default!;
+        public Product Product { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            var emptyStudent = new Student();
-
-            if (await TryUpdateModelAsync<Student>(
-                emptyStudent,
-                "student",   // Prefix for form value.
-                s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate, s => s.Age))
+            if (!ModelState.IsValid)
             {
-                _context.Students.Add(emptyStudent);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+                return Page();
             }
+            Product.ID = 0;
+            _context.Products.Add(Product);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
 
             return Page();
         }

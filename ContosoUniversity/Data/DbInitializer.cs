@@ -1,328 +1,83 @@
-using ContosoUniversity.Models;
+using BugBeading.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ContosoUniversity.Data
+namespace BugBeading.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(SchoolContext context)
+        public static void Initialize(InventoryContext context)
         {
-            // Look for any students.
-            if (context.Students.Any())
+            // Avoid inserting duplicate sample products.
+            if (context.Products.Any())
             {
-                return;   // DB has been seeded
+                return;
             }
 
-            var alexander = new Student
+            var products = new Product[]
             {
-                FirstMidName = "Carson",
-                LastName = "Alexander",
-                EnrollmentDate = DateTime.Parse("2016-09-01")
-            };
-
-            var alonso = new Student
-            {
-                FirstMidName = "Meredith",
-                LastName = "Alonso",
-                EnrollmentDate = DateTime.Parse("2018-09-01")
-            };
-
-            var anand = new Student
-            {
-                FirstMidName = "Arturo",
-                LastName = "Anand",
-                EnrollmentDate = DateTime.Parse("2019-09-01")
-            };
-
-            var barzdukas = new Student
-            {
-                FirstMidName = "Gytis",
-                LastName = "Barzdukas",
-                EnrollmentDate = DateTime.Parse("2018-09-01")
-            };
-
-            var li = new Student
-            {
-                FirstMidName = "Yan",
-                LastName = "Li",
-                EnrollmentDate = DateTime.Parse("2018-09-01")
-            };
-
-            var justice = new Student
-            {
-                FirstMidName = "Peggy",
-                LastName = "Justice",
-                EnrollmentDate = DateTime.Parse("2017-09-01")
-            };
-
-            var norman = new Student
-            {
-                FirstMidName = "Laura",
-                LastName = "Norman",
-                EnrollmentDate = DateTime.Parse("2019-09-01")
-            };
-
-            var olivetto = new Student
-            {
-                FirstMidName = "Nino",
-                LastName = "Olivetto",
-                EnrollmentDate = DateTime.Parse("2011-09-01")
-            };
-
-            var students = new Student[]
-            {
-                alexander,
-                alonso,
-                anand,
-                barzdukas,
-                li,
-                justice,
-                norman,
-                olivetto
-            };
-
-            context.AddRange(students);
-
-            var abercrombie = new Instructor
-            {
-                FirstMidName = "Kim",
-                LastName = "Abercrombie",
-                HireDate = DateTime.Parse("1995-03-11")
-            };
-
-            var fakhouri = new Instructor
-            {
-                FirstMidName = "Fadi",
-                LastName = "Fakhouri",
-                HireDate = DateTime.Parse("2002-07-06")
-            };
-
-            var harui = new Instructor
-            {
-                FirstMidName = "Roger",
-                LastName = "Harui",
-                HireDate = DateTime.Parse("1998-07-01")
-            };
-
-            var kapoor = new Instructor
-            {
-                FirstMidName = "Candace",
-                LastName = "Kapoor",
-                HireDate = DateTime.Parse("2001-01-15")
-            };
-
-            var zheng = new Instructor
-            {
-                FirstMidName = "Roger",
-                LastName = "Zheng",
-                HireDate = DateTime.Parse("2004-02-12")
-            };
-
-            var instructors = new Instructor[]
-            {
-                abercrombie,
-                fakhouri,
-                harui,
-                kapoor,
-                zheng
-            };
-
-            context.AddRange(instructors);
-
-            var officeAssignments = new OfficeAssignment[]
-            {
-                new OfficeAssignment {
-                    Instructor = fakhouri,
-                    Location = "Smith 17" },
-                new OfficeAssignment {
-                    Instructor = harui,
-                    Location = "Gowan 27" },
-                new OfficeAssignment {
-                    Instructor = kapoor,
-                    Location = "Thompson 304" }
-            };
-
-            context.AddRange(officeAssignments);
-
-            var english = new Department
-            {
-                Name = "English",
-                Budget = 350000,
-                StartDate = DateTime.Parse("2007-09-01"),
-                Administrator = abercrombie
-            };
-
-            var mathematics = new Department
-            {
-                Name = "Mathematics",
-                Budget = 100000,
-                StartDate = DateTime.Parse("2007-09-01"),
-                Administrator = fakhouri
-            };
-
-            var engineering = new Department
-            {
-                Name = "Engineering",
-                Budget = 350000,
-                StartDate = DateTime.Parse("2007-09-01"),
-                Administrator = harui
-            };
-
-            var economics = new Department
-            {
-                Name = "Economics",
-                Budget = 100000,
-                StartDate = DateTime.Parse("2007-09-01"),
-                Administrator = kapoor
-            };
-
-            var departments = new Department[]
-            {
-                english,
-                mathematics,
-                engineering,
-                economics
-            };
-
-            context.AddRange(departments);
-
-            var chemistry = new Course
-            {
-                CourseID = 1050,
-                Title = "Chemistry",
-                Credits = 3,
-                Department = engineering,
-                Instructors = new List<Instructor> { kapoor, harui }
-            };
-
-            var microeconomics = new Course
-            {
-                CourseID = 4022,
-                Title = "Microeconomics",
-                Credits = 3,
-                Department = economics,
-                Instructors = new List<Instructor> { zheng }
-            };
-
-            var macroeconmics = new Course
-            {
-                CourseID = 4041,
-                Title = "Macroeconomics",
-                Credits = 3,
-                Department = economics,
-                Instructors = new List<Instructor> { zheng }
-            };
-
-            var calculus = new Course
-            {
-                CourseID = 1045,
-                Title = "Calculus",
-                Credits = 4,
-                Department = mathematics,
-                Instructors = new List<Instructor> { fakhouri }
-            };
-
-            var trigonometry = new Course
-            {
-                CourseID = 3141,
-                Title = "Trigonometry",
-                Credits = 4,
-                Department = mathematics,
-                Instructors = new List<Instructor> { harui }
-            };
-
-            var composition = new Course
-            {
-                CourseID = 2021,
-                Title = "Composition",
-                Credits = 3,
-                Department = english,
-                Instructors = new List<Instructor> { abercrombie }
-            };
-
-            var literature = new Course
-            {
-                CourseID = 2042,
-                Title = "Literature",
-                Credits = 4,
-                Department = english,
-                Instructors = new List<Instructor> { abercrombie }
-            };
-
-            var courses = new Course[]
-            {
-                chemistry,
-                microeconomics,
-                macroeconmics,
-                calculus,
-                trigonometry,
-                composition,
-                literature
-            };
-
-            context.AddRange(courses);
-
-            var enrollments = new Enrollment[]
-            {
-                new Enrollment {
-                    Student = alexander,
-                    Course = chemistry,
-                    Grade = Grade.A
+                new Product
+                {
+                    Name = "Purple Keychain",
+                    ProductType = "Keychain",
+                    DateAdded = new DateTime(2026, 1, 10),
+                    Description = "A handmade purple beaded keychain featuring amethyst.",
+                    Price = 12.30,
+                    ImageUrl = "https://i.etsystatic.com/67630125/r/il/936bab/8522292559/il_1588xN.8522292559_kkrg.jpg"
                 },
-                new Enrollment {
-                    Student = alexander,
-                    Course = microeconomics,
-                    Grade = Grade.C
+
+                new Product
+                {
+                    Name = "Teal and Brown Keychain",
+                    ProductType = "Keychain",
+                    DateAdded = new DateTime(2026, 1, 15),
+                    Description = "A handmade keychain featuring teal and brown beads.",
+                    Price = 12.30,
+                    ImageUrl = "https://i.etsystatic.com/67630125/r/il/ae4845/8474370476/il_1588xN.8474370476_38be.jpg"
                 },
-                new Enrollment {
-                    Student = alexander,
-                    Course = macroeconmics,
-                    Grade = Grade.B
+
+                new Product
+                {
+                    Name = "Ocean Keychain",
+                    ProductType = "Keychain",
+                    DateAdded = new DateTime(2026, 2, 1),
+                    Description = "An ocean-inspired beaded keychain.",
+                    Price = 12.30,
+                    ImageUrl = "https://i.etsystatic.com/67630125/r/il/0c4645/8474354618/il_1588xN.8474354618_qhf2.jpg"
                 },
-                new Enrollment {
-                    Student = alonso,
-                    Course = calculus,
-                    Grade = Grade.B
+
+                new Product
+                {
+                    Name = "Flower Earrings with Leaf",
+                    ProductType = "Earrings",
+                    DateAdded = new DateTime(2026, 2, 10),
+                    Description = "Handmade flower earrings with a leaf detail.",
+                    Price = 10.30,
+                    ImageUrl = "https://i.etsystatic.com/67630125/r/il/654672/8544205629/il_1588xN.8544205629_761p.jpg"
                 },
-                new Enrollment {
-                    Student = alonso,
-                    Course = trigonometry,
-                    Grade = Grade.B
+
+                new Product
+                {
+                    Name = "Cascading Flower Earrings",
+                    ProductType = "Earrings",
+                    DateAdded = new DateTime(2026, 2, 15),
+                    Description = "Blue, green, and yellow cascading flower earrings.",
+                    Price = 10.30,
+                    ImageUrl = "https://i.etsystatic.com/67630125/r/il/0be01b/8544179263/il_1588xN.8544179263_ckwr.jpg"
                 },
-                new Enrollment {
-                    Student = alonso,
-                    Course = composition,
-                    Grade = Grade.B
-                },
-                new Enrollment {
-                    Student = anand,
-                    Course = chemistry
-                },
-                new Enrollment {
-                    Student = anand,
-                    Course = microeconomics,
-                    Grade = Grade.B
-                },
-                new Enrollment {
-                    Student = barzdukas,
-                    Course = chemistry,
-                    Grade = Grade.B
-                },
-                new Enrollment {
-                    Student = li,
-                    Course = composition,
-                    Grade = Grade.B
-                },
-                new Enrollment {
-                    Student = justice,
-                    Course = literature,
-                    Grade = Grade.B
+
+                new Product
+                {
+                    Name = "Rose Quartz Earrings",
+                    ProductType = "Earrings",
+                    DateAdded = new DateTime(2026, 3, 1),
+                    Description = "Earrings featuring rose quartz beads with silver findings.",
+                    Price = 8.30,
+                    ImageUrl = "https://i.etsystatic.com/67630125/r/il/74a057/8474402208/il_1588xN.8474402208_mte6.jpg"
                 }
             };
-
-            context.AddRange(enrollments);
+            context.Products.AddRange(products);
             context.SaveChanges();
         }
     }

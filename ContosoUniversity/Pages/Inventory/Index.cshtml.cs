@@ -6,81 +6,119 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ContosoUniversity.Data;
-using ContosoUniversity.Models;
+using BugBeading.Data;
+using BugBeading.Models;
 
-namespace ContosoUniversity.Pages.Inventory
+namespace BugBeading.Pages.Inventory
 {
     public class IndexModel : PageModel
 {
-    private readonly SchoolContext _context;
+    private readonly InventoryContext _context;
     private readonly IConfiguration Configuration;
 
-    public IndexModel(SchoolContext context, IConfiguration configuration)
+    public IndexModel(InventoryContext context, IConfiguration configuration)
     {
         _context = context;
         Configuration = configuration;
     }
 
-    public string NameSort { get; set; }
-    public string DateSort { get; set; }
-    public string AgeSort { get; set; }
-    public string CurrentFilter { get; set; }
-    public string CurrentSort { get; set; }
+        public Product? SelectedProduct { get; set; }
+        public string? CurrentFilter { get; set; }
+        public string? CurrentSort { get; set; }
 
-    public PaginatedList<Student> Students { get; set; }
+    public PaginatedList<Product> Products { get; set; }
 
-    public async Task OnGetAsync(string sortOrder,
-            string currentFilter, string searchString, int? pageIndex)
+    public async Task<IActionResult> OnGetAsync(string? sortOrder, string? currentFilter, string? searchString, int? pageIndex, int? selectedProductId) {
+        CurrentSort = sortOrder;
+        if (searchString == null)
         {
-            CurrentSort = sortOrder;
-            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
-            AgeSort = sortOrder == "Age" ? "age_desc" : "Age";
-            if (searchString != null)
-            {
-                pageIndex = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-        CurrentFilter = searchString;
-
-        IQueryable<Student> studentsIQ = from s in _context.Students
-                                        select s;
-
-        if (!String.IsNullOrEmpty(searchString))
-        {
-            studentsIQ = studentsIQ.Where(s => s.LastName.Contains(searchString)
-                                   || s.FirstMidName.Contains(searchString));
+            searchString = currentFilter;
         }
+        else
+        {
+            pageIndex = 1;
+        }
+        CurrentFilter = searchString;
+        IQueryable<Product> productsQuery =
+            _context.Products.AsNoTracking();
+
+        if (!string.IsNullOrWhiteSpace(searchString))
+        {
+            productsQuery = productsQuery.Where(p =>
+                p.Name.Contains(searchString) ||
+                (p.ProductType != null &&
+                    p.ProductType.Contains(searchString)));
+        }
+
+        // Sort the products.
         switch (sortOrder)
         {
-            case "name_desc":
-                studentsIQ = studentsIQ.OrderByDescending(s => s.LastName);
+            case "Type":
+                productsQuery = productsQuery
+                    .OrderBy(p => p.ProductType)
+                    .ThenBy(p => p.Name);
                 break;
-            case "Date":
-                studentsIQ = studentsIQ.OrderBy(s => s.EnrollmentDate);
+
+            case "Newest":
+                productsQuery = productsQuery
+                    .OrderByDescending(p => p.DateAdded)
+                    .ThenBy(p => p.Name);
                 break;
-            case "date_desc":
-                studentsIQ = studentsIQ.OrderByDescending(s => s.EnrollmentDate);
+
+            case "Price":
+                productsQuery = productsQuery
+                    .OrderBy(p => p.Price);
                 break;
-            case "Age":
-                studentsIQ = studentsIQ.OrderBy(s => s.Age);
+
+            case "PriceDesc":
+                productsQuery = productsQuery
+                    .OrderByDescending(p => p.Price);
                 break;
-            case "age_desc":
-                studentsIQ = studentsIQ.OrderByDescending(s => s.Age);
+
+            case "NameDesc":
+                productsQuery = productsQuery
+                    .OrderByDescending(p => p.Name);
                 break;
+
             default:
-                studentsIQ = studentsIQ.OrderBy(s => s.LastName);
+                productsQuery = productsQuery
+                    .OrderBy(p => p.Name);
                 break;
         }
 
-        var pageSize = Configuration.GetValue("PageSize", 4);
-        Students = await PaginatedList<Student>.CreateAsync(
-            studentsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);    
+        int pageSize = Configuration.GetValue<int>(
+            "PageSize", 6);
+
+        Products = await PaginatedList<Product>.CreateAsync( productsQuery,pageIndex ?? 1,pageSize);
+        if (selectedProductId.HasValue)
+        {
+            SelectedProduct = await _context.Products
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p =>
+                    p.ID == selectedProductId.Value);
+
+            if (SelectedProduct == null)
+            {
+                return NotFound();
+            }
         }
+
+        return Page();
+    }
+    public async Task<IActionResult> OnPostAddToCartAsync(int productId){
+        bool productExists = await _context.Products
+            .AnyAsync(p => p.ID == productId);
+
+        if (!productExists)
+        {
+            return NotFound();
+        }
+
+        // Cart storage still needs to be implemented.
+        TempData["CartMessage"] =
+            "Cart wil go here";
+
+        return RedirectToPage("./Index");
+    }
     }
 }

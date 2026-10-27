@@ -1,5 +1,5 @@
 @page
-@model ContosoUniversity.Pages.Inventory.CreateModel
+@model BugBeading.Pages.Inventory.CreateModel
 
         @{
         ViewData["Title"] = "Create";
@@ -7,31 +7,41 @@
         
         <h1>Create</h1>
         
-    <h4>Student</h4>
+    <h4>Product</h4>
     <hr />
     <div class="row">
     <div class="col-md-4">
     <form method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Student.LastName" class="control-label"></label>
-                <input asp-for="Student.LastName" class="form-control" />
-                <span asp-validation-for="Student.LastName" class="text-danger"></span>
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Student.FirstMidName" class="control-label"></label>
-                <input asp-for="Student.FirstMidName" class="form-control" />
-                <span asp-validation-for="Student.FirstMidName" class="text-danger"></span>
+                <label asp-for="Product.ProductType" class="control-label"></label>
+                <input asp-for="Product.ProductType" class="form-control" />
+                <span asp-validation-for="Product.ProductType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Student.EnrollmentDate" class="control-label"></label>
-                <input asp-for="Student.EnrollmentDate" class="form-control" />
-                <span asp-validation-for="Student.EnrollmentDate" class="text-danger"></span>
+                <label asp-for="Product.DateAdded" class="control-label"></label>
+                <input asp-for="Product.DateAdded" class="form-control" />
+                <span asp-validation-for="Product.DateAdded" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Student.Age" class="control-label"></label>
-                <input asp-for="Student.Age" class="form-control" />
-                <span asp-validation-for="Student.Age" class="text-danger"></span>
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Product.ImageUrl" class="control-label"></label>
+                <input asp-for="Product.ImageUrl" class="form-control" />
+                <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

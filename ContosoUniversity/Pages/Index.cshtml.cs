@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ContosoUniversity.Pages;
+namespace BugBeading.Pages;
 
 public class IndexModel : PageModel
 {

@@ -6,36 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ContosoUniversity.Data;
-using ContosoUniversity.Models;
+using BugBeading.Data;
+using BugBeading.Models;
 
-namespace ContosoUniversity.Pages.Inventory
+namespace BugBeading.Pages.Inventory
 {
     public class EditModel : PageModel
     {
-        private readonly ContosoUniversity.Data.SchoolContext _context;
+        private readonly BugBeading.Data.InventoryContext _context;
 
-        public EditModel(ContosoUniversity.Data.SchoolContext context)
+        public EditModel(BugBeading.Data.InventoryContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Student Student { get; set; } = default!;
+        public Product Product { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            var product = await _context.Products
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.ID == id.Value);
+
+            if (product == null)
             {
                 return NotFound();
             }
 
-            Student = await _context.Students.FindAsync(id);
+            Product = product;
 
-            if (Student == null)
-            {
-                return NotFound();
-            }
             return Page();
         }
 
@@ -43,28 +43,28 @@ namespace ContosoUniversity.Pages.Inventory
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            var studentToUpdate = await _context.Students.FindAsync(id);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            if (studentToUpdate == null)
+            var productToUpdate = await _context.Products
+                .FirstOrDefaultAsync(p => p.ID == id);
+
+            if (productToUpdate == null)
             {
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Student>(
-                studentToUpdate,
-                "student",
-                s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate, s => s.Age))
-            {
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
+            productToUpdate.Name = Product.Name;
+            productToUpdate.ProductType = Product.ProductType;
+            productToUpdate.DateAdded = Product.DateAdded;
+            productToUpdate.Description = Product.Description;
+            productToUpdate.Price = Product.Price;
+            productToUpdate.ImageUrl = Product.ImageUrl;
 
-            return Page();
-        }
-
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.ID == id);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
         }
     }
 }
