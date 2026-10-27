@@ -4,10 +4,11 @@
 @{
     ViewData["Title"] = "Inventory";
 }
-<!-- figure out why pages aren't connecting right, add in admin log in?(model after seed library perhaps) -->
+<!-- Adjust create, details, and edit, then add in admin log in?(model after seed library perhaps) -->
 <div class="inventory-page container my-4">
     <section class="gallery-panel">
         <h1 class="text-center mb-4">Product Inventory</h1>
+        <a asp-page="./Create" class="btn btn-success">+ Create New Product</a>
         <form method="get" asp-page="./Index"
               class="inventory-search mb-3">
             <label for="searchProducts">Search Products:</label>
@@ -16,7 +17,7 @@
                    name="SearchString"
                    value="@Model.CurrentFilter"
                    class="form-control" />
-            <button type="submit" class="btn btn-bb">(Search is case-sensitive)</button>
+            <small>(Search is case-sensitive)</small>
         </form>
         <form method="get" asp-page="./Index"
               class="inventory-sort mb-4">
@@ -74,7 +75,25 @@
                                 <p class="product-card-price">
                                     @item.Price.ToString("C")
                                 </p>
-                                <a asp-page="./Details">See Details</a>
+                                <div class="product-card-actions">
+                                    <a asp-page="./Details"
+                                    asp-route-id="@item.ID"
+                                    class="btn btn-outline-secondary btn-sm">
+                                        See Details
+                                    </a>
+
+                                    <a asp-page="./Edit"
+                                    asp-route-id="@item.ID"
+                                    class="btn btn-outline-success btn-sm">
+                                        Edit
+                                    </a>
+
+                                    <a asp-page="./Delete"
+                                    asp-route-id="@item.ID"
+                                    class="btn btn-outline-danger btn-sm">
+                                        Delete
+                                    </a>
+                                </div>
                             </div>
                         </article>
                     </a>

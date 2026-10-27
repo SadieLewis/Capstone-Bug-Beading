@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using BugBeading.Data;
 using BugBeading.Models;
 
+//Get rid of paginated list stuff
 namespace BugBeading.Pages.Inventory
 {
     public class IndexModel : PageModel
@@ -26,7 +27,7 @@ namespace BugBeading.Pages.Inventory
         public string? CurrentFilter { get; set; }
         public string? CurrentSort { get; set; }
 
-    public PaginatedList<Product> Products { get; set; }
+    public IList<Product> Products { get; set; } = new List<Product>();
 
     public async Task<IActionResult> OnGetAsync(string? sortOrder, string? currentFilter, string? searchString, int? pageIndex, int? selectedProductId) {
         CurrentSort = sortOrder;
@@ -86,10 +87,7 @@ namespace BugBeading.Pages.Inventory
                 break;
         }
 
-        int pageSize = Configuration.GetValue<int>(
-            "PageSize", 6);
-
-        Products = await PaginatedList<Product>.CreateAsync( productsQuery,pageIndex ?? 1,pageSize);
+        Products = await productsQuery.ToListAsync();
         if (selectedProductId.HasValue)
         {
             SelectedProduct = await _context.Products
@@ -104,21 +102,6 @@ namespace BugBeading.Pages.Inventory
         }
 
         return Page();
-    }
-    public async Task<IActionResult> OnPostAddToCartAsync(int productId){
-        bool productExists = await _context.Products
-            .AnyAsync(p => p.ID == productId);
-
-        if (!productExists)
-        {
-            return NotFound();
-        }
-
-        // Cart storage still needs to be implemented.
-        TempData["CartMessage"] =
-            "Cart wil go here";
-
-        return RedirectToPage("./Index");
     }
     }
 }

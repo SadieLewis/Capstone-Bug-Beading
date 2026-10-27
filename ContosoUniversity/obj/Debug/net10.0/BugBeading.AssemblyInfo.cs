@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BugBeading")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7f77451c6fff33022957f46a9a460fc461bc57e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6dbda95c52fc5eeaa7d0397e543a8e275c7a4af3")]
 [assembly: System.Reflection.AssemblyProductAttribute("BugBeading")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BugBeading")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
