@@ -1,0 +1,63 @@
+@page
+@model BugBeading.Pages.Spotlight.AddModel
+
+@{
+    ViewData["Title"] = "Add Spotlight Products";
+}
+
+<h1>Add to Best Sellers or On Sale:</h1>
+<div class="mb-3">
+    <a asp-page="/Spotlight/Index"
+       class="btn btn-outline-secondary">
+        Back to Spotlight
+    </a>
+    <a asp-page="/Spotlight/Add"
+       asp-route-carousel="BestSellers"
+       class="btn btn-outline-primary">
+        Best Sellers
+    </a>
+    <a asp-page="/Spotlight/Add"
+       asp-route-carousel="OnSale"
+       class="btn btn-outline-primary">
+        On Sale
+    </a>
+</div>
+@if (Model.Products.Count == 0)
+{
+    <div class="alert alert-info">
+        All inventory products are already featured in this carousel.
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
+                    {
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 220px; object-fit: contain;" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">
+                            <strong>Type:</strong> @product.ProductType
+                        </p>
+                        <p class="card-text">
+                            <strong>Price:</strong>
+                            @product.Price.ToString("C")
+                        </p>
+                        <form method="post">
+                            <input type="hidden" name="productId" value="@product.ID" />
+                            <input type="hidden" name="carousel" value="@Model.Carousel" />
+                            <button type="submit" class="btn btn-success">
+                                Add to @(Model.Carousel == "BestSellers" ? "Best Sellers" : "On Sale")
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
