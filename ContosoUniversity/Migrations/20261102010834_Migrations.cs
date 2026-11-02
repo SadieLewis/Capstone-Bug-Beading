@@ -12,7 +12,7 @@ namespace BugBeading.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
@@ -23,7 +23,7 @@ namespace BugBeading.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.ID);
+                    table.PrimaryKey("PK_Customers", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,7 +37,9 @@ namespace BugBeading.Migrations
                     DateAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
                     Price = table.Column<double>(type: "REAL", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true)
+                    ImageUrl = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    IsBestSeller = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsOnSale = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +47,7 @@ namespace BugBeading.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
@@ -53,47 +55,47 @@ namespace BugBeading.Migrations
                     Finalized = table.Column<bool>(type: "INTEGER", nullable: false),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Customer_ID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CustomerID = table.Column<int>(type: "INTEGER", nullable: true),
                     Customer_Name = table.Column<string>(type: "TEXT", maxLength: 30, nullable: true),
                     Customer_Address = table.Column<string>(type: "TEXT", maxLength: 30, nullable: true),
                     Product_ID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductID = table.Column<int>(type: "INTEGER", nullable: true),
                     Product_Name = table.Column<string>(type: "TEXT", maxLength: 25, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.PrimaryKey("PK_Orders", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Order_Customer_Customer_ID",
-                        column: x => x.Customer_ID,
-                        principalTable: "Customer",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Orders_Customers_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "Customers",
+                        principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_Order_Product_Product_ID",
-                        column: x => x.Product_ID,
+                        name: "FK_Orders_Product_ProductID",
+                        column: x => x.ProductID,
                         principalTable: "Product",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_Customer_ID",
-                table: "Order",
-                column: "Customer_ID");
+                name: "IX_Orders_CustomerID",
+                table: "Orders",
+                column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_Product_ID",
-                table: "Order",
-                column: "Product_ID");
+                name: "IX_Orders_ProductID",
+                table: "Orders",
+                column: "ProductID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Product");

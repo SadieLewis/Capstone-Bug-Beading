@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugBeading.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20261026204636_Migrations")]
+    [Migration("20261102010834_Migrations")]
     partial class Migrations
     {
         /// <inheritdoc />
@@ -40,13 +40,16 @@ namespace BugBeading.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("BugBeading.Models.Order", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CustomerID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Customer_Address")
@@ -66,6 +69,9 @@ namespace BugBeading.Migrations
                     b.Property<bool>("Finalized")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ProductID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Product_ID")
                         .HasColumnType("INTEGER");
 
@@ -75,11 +81,11 @@ namespace BugBeading.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("Customer_ID");
+                    b.HasIndex("CustomerID");
 
-                    b.HasIndex("Product_ID");
+                    b.HasIndex("ProductID");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BugBeading.Models.Product", b =>
@@ -98,6 +104,12 @@ namespace BugBeading.Migrations
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsBestSeller")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsOnSale")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -120,15 +132,11 @@ namespace BugBeading.Migrations
                 {
                     b.HasOne("BugBeading.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("Customer_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CustomerID");
 
                     b.HasOne("BugBeading.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("Product_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ProductID");
 
                     b.Navigation("Customer");
 

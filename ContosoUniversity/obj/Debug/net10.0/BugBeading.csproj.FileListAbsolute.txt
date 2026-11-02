@@ -367,4 +367,4 @@ C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversi
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\BugBeading.pdb
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\BugBeading.genruntimeconfig.cache
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\ref\BugBeading.dll
-C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\tewbkic4ep-{0}-m41agi4abl-m41agi4abl.gz
+C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\tewbkic4ep-{0}-gps5fj820v-gps5fj820v.gz

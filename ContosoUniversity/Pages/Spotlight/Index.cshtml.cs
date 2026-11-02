@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BugBeading.Data;
 using BugBeading.Models;
 
-namespace BugBeading.Pages.Courses
+namespace BugBeading.Pages.Spotlight
 {
     public class IndexModel : PageModel
     {
@@ -19,9 +19,25 @@ namespace BugBeading.Pages.Courses
             _context = context;
         }
 
+        public IList<Product> BestSellers { get; set; }
+            = new List<Product>();
+
+        public IList<Product> OnSale { get; set; }
+            = new List<Product>();
+
         public async Task OnGetAsync()
         {
-            
+            BestSellers = await _context.Products
+                .AsNoTracking()
+                .Where(p => p.IsBestSeller)
+                .OrderBy(p => p.Name)
+                .ToListAsync();
+
+            OnSale = await _context.Products
+                .AsNoTracking()
+                .Where(p => p.IsOnSale)
+                .OrderBy(p => p.Name)
+                .ToListAsync();
         }
     }
 }
