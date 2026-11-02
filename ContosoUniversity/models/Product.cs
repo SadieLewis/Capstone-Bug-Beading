@@ -24,5 +24,9 @@ namespace BugBeading.Models {
 
         [StringLength(500)]
         public string? ImageUrl { get; set; }
+
+        public bool IsBestSeller { get; set; } = false;
+
+        public bool IsOnSale { get; set; } = false;
     }
 }

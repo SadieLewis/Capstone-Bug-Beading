@@ -80,3 +80,123 @@ a{
     padding: 1rem;
     text-align: center;
 }
+
+/*Details Design*/
+.product-details-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding: 2rem;
+    background-color: #b5b5b5;
+    border: 1px solid #888;
+    border-radius: 4px;
+}
+
+/* Image container */
+.product-details-image-container {
+    width: 100%;
+    height: 280px;
+    background-color: #e8e8e8;
+    border: 1px solid #888;
+    overflow: hidden;
+}
+
+.product-details-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-details-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #444;
+    text-align: center;
+}
+
+/* Product information */
+.product-details-information {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 1rem;
+}
+
+.product-details-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+}
+
+.product-details-heading h1 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.product-details-price {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.product-details-description h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-details-description p {
+    overflow-wrap: anywhere;
+}
+
+.product-details-extra p {
+    margin-bottom: 0.5rem;
+}
+
+/* Back button */
+.product-details-actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: auto;
+}
+
+.btn-back-inventory {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    color: #111;
+    background-color: #28c76f;
+    border: 1px solid #179d50;
+    border-radius: 2rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-back-inventory:hover {
+    background-color: #20ad60;
+    color: #111;
+}
+
+/* Responsive layout */
+@media (max-width: 767.98px) {
+    .product-details-card {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .product-details-image-container {
+        max-width: 100%;
+        height: 260px;
+    }
+
+    .product-details-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

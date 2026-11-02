@@ -291,7 +291,6 @@ C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversi
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\scopedcss\bundle\BugBeading.styles.css
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\scopedcss\projectbundle\BugBeading.bundle.scp.css
-C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\tewbkic4ep-{0}-zdfucuoend-zdfucuoend.gz
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\dbrozmnon9-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\a569f97zsc-{0}-27t0rzzv4y-27t0rzzv4y.gz
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\rwa27zh1ca-{0}-61n19gt1b8-61n19gt1b8.gz
@@ -368,3 +367,4 @@ C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversi
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\BugBeading.pdb
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\BugBeading.genruntimeconfig.cache
 C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\ref\BugBeading.dll
+C:\Users\sadie\OneDrive\Desktop\GitHub Test\Capstone-Bug-Beading\ContosoUniversity\obj\Debug\net10.0\compressed\tewbkic4ep-{0}-m41agi4abl-m41agi4abl.gz

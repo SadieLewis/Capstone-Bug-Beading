@@ -23,17 +23,39 @@
               class="inventory-sort mb-4">
             <input type="hidden" name="SearchString" value="@Model.CurrentFilter" />
             <span class="fw-semibold">Sort By:</span>
-            <label>
-                <input type="radio" name="sortOrder" value="Type" checked="@(Model.CurrentSort == "Type")" />
+            <label class="me-3">
+                <input type="radio"
+                    name="sortOrder"
+                    value="Name"
+                    checked="@(Model.CurrentSort == "Name" || string.IsNullOrEmpty(Model.CurrentSort))" />
+                Name: A–Z
+            </label>
+            <label class="me-3">
+                <input type="radio"
+                    name="sortOrder"
+                    value="Type"
+                    checked="@(Model.CurrentSort == "Type")" />
                 Type
             </label>
-            <!-- fix this sorting issue, adjust in .cs file -->
-            <label>
-                <input type="radio" name="sortOrder"value="Color"checked="@(Model.CurrentSort == "PriceDesc")" />
-                Price
+            <label class="me-3">
+                <input type="radio"
+                    name="sortOrder"
+                    value="Price"
+                    checked="@(Model.CurrentSort == "Price")" />
+                Price: Low to High
             </label>
-            <label>
-                <input type="radio" name="sortOrder" value="Newest" checked="@(Model.CurrentSort == "Newest")" />
+            <label class="me-3">
+                <input type="radio"
+                    name="sortOrder"
+                    value="PriceDesc"
+                    checked="@(Model.CurrentSort == "PriceDesc")" />
+                Price: High to Low
+            </label>
+            <label class="me-3">
+                <input type="radio"
+                    name="sortOrder"
+                    value="Newest"
+                    checked="@(Model.CurrentSort == "Newest")" />
                 Newest
             </label>
             <button type="submit" class="btn btn-outline-secondary btn-sm">

@@ -59,28 +59,22 @@ namespace BugBeading.Pages.Inventory
                     .OrderBy(p => p.ProductType)
                     .ThenBy(p => p.Name);
                 break;
-
             case "Newest":
                 productsQuery = productsQuery
                     .OrderByDescending(p => p.DateAdded)
                     .ThenBy(p => p.Name);
                 break;
-
             case "Price":
                 productsQuery = productsQuery
-                    .OrderBy(p => p.Price);
+                    .OrderBy(p => p.Price)
+                    .ThenBy(p => p.Name);
                 break;
-
             case "PriceDesc":
                 productsQuery = productsQuery
-                    .OrderByDescending(p => p.Price);
+                    .OrderByDescending(p => p.Price)
+                    .ThenBy(p => p.Name);
                 break;
-
-            case "NameDesc":
-                productsQuery = productsQuery
-                    .OrderByDescending(p => p.Name);
-                break;
-
+            case "Name":
             default:
                 productsQuery = productsQuery
                     .OrderBy(p => p.Name);
