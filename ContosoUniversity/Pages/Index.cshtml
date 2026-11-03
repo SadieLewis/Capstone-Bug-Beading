@@ -16,17 +16,18 @@
                 <h1 class="text-center">Home</h1>
                 <div class="row mb-auto">
                     <p>
-                        Handcrafted pieces made with care. 
+                        View our collection of handcrafted pieces made with care and find the perfect piece that you love.
                     </p>
                     <a class="btn btn-dark my-1" asp-area="" asp-page="/About" role="button">About our Company</a>
                     <a class="btn btn-dark my-1" asp-area="" asp-page="/Inventory/Index" role="button">Browse our Inventory</a>
                     <a class="btn btn-dark my-1" asp-area="" asp-page="/Spotlight/Index" role="button">View our Spotlight Items</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-dark">
+                        Admin? Login here:
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">
-    Admin? Login here:
-</a>
+
 <footer class="py-5 bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/09/29/14/06/background-1702930_1280.jpg')"></footer>
