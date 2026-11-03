@@ -8,7 +8,9 @@
 <div class="inventory-page container my-4">
     <section class="gallery-panel">
         <h1 class="text-center mb-4">Product Inventory</h1>
-        <a asp-page="./Create" class="btn btn-success">+ Create New Product</a>
+        @if (User.IsInRole("Admin")){
+            <a asp-page="./Create" class="btn btn-success">+ Create New Product</a>
+        }
         <form method="get" asp-page="./Index"
               class="inventory-search mb-3">
             <label for="searchProducts">Search Products:</label>
@@ -103,18 +105,14 @@
                                     class="btn btn-outline-secondary btn-sm">
                                         See Details
                                     </a>
-
-                                    <a asp-page="./Edit"
-                                    asp-route-id="@item.ID"
-                                    class="btn btn-outline-success btn-sm">
-                                        Edit
-                                    </a>
-
-                                    <a asp-page="./Delete"
-                                    asp-route-id="@item.ID"
-                                    class="btn btn-outline-danger btn-sm">
-                                        Delete
-                                    </a>
+                                    @if (User.IsInRole("Admin")){
+                                        <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-outline-success btn-sm">
+                                            Edit
+                                        </a>
+                                        <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-outline-danger btn-sm">
+                                            Delete
+                                        </a>
+                                    }
                                 </div>
                             </div>
                         </article>

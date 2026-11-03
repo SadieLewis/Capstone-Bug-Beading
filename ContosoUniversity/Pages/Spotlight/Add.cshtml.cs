@@ -18,8 +18,7 @@ namespace BugBeading.Pages.Spotlight
             _context = context;
         }
 
-        public IList<Product> Products { get; set; }
-            = new List<Product>();
+        public IList<Product> Products { get; set; } = new List<Product>();
 
         public string Carousel { get; set; } = "BestSellers";
 
@@ -49,7 +48,6 @@ namespace BugBeading.Pages.Spotlight
                     .OrderBy(p => p.Name)
                     .ToListAsync();
             }
-
             return Page();
         }
 
@@ -61,15 +59,11 @@ namespace BugBeading.Pages.Spotlight
             {
                 return BadRequest();
             }
-
-            var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.ID == productId);
-
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.ID == productId);
             if (product == null)
             {
                 return NotFound();
             }
-
             if (normalized == "BestSellers")
             {
                 product.IsBestSeller = true;
@@ -78,12 +72,8 @@ namespace BugBeading.Pages.Spotlight
             {
                 product.IsOnSale = true;
             }
-
             await _context.SaveChangesAsync();
-
-            return RedirectToPage(
-                "/Spotlight/Add",
-                new { carousel = normalized });
+            return RedirectToPage("/Spotlight/Add", new { carousel = normalized });
         }
 
         private static bool TryNormalizeCarousel(
@@ -97,7 +87,6 @@ namespace BugBeading.Pages.Spotlight
                 normalized = "BestSellers";
                 return true;
             }
-
             if (string.Equals(
                 carousel, "OnSale",
                 System.StringComparison.OrdinalIgnoreCase))
@@ -105,7 +94,6 @@ namespace BugBeading.Pages.Spotlight
                 normalized = "OnSale";
                 return true;
             }
-
             normalized = string.Empty;
             return false;
         }

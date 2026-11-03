@@ -7,17 +7,14 @@
 
 <h1>Remove from Best Sellers or On Sale</h1>
 <div class="mb-3">
-    <a asp-page="/Spotlight/Index"
-       class="btn btn-outline-secondary">
+    <a asp-page="/Spotlight/Index" class="btn btn-outline-secondary">
         Back to Spotlight
     </a>
-    <a asp-page="/Spotlight/Remove"
-       asp-route-carousel="BestSellers"
+    <a asp-page="/Spotlight/Remove" asp-route-carousel="BestSellers"
        class="btn btn-outline-primary">
         Best Sellers
     </a>
-    <a asp-page="/Spotlight/Remove"
-       asp-route-carousel="OnSale"
+    <a asp-page="/Spotlight/Remove" asp-route-carousel="OnSale"
        class="btn btn-outline-primary">
         On Sale
     </a>
@@ -37,10 +34,7 @@ else
                 <div class="card h-100">
                     @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
                     {
-                        <img src="@product.ImageUrl"
-                             class="card-img-top"
-                             alt="@product.Name"
-                             style="height: 220px; object-fit: contain;" />
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 220px; object-fit: contain;" />
                     }
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>

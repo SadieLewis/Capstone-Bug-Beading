@@ -4,15 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BugBeading.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BugBeading.Data
 {
-    public class InventoryContext : DbContext
+    public class InventoryContext : IdentityDbContext<IdentityUser>
     {
-        public InventoryContext(
-            DbContextOptions<InventoryContext> options)
-            : base(options)
+        public InventoryContext(DbContextOptions<InventoryContext> options): base(options)
         {
+            
         }
 
         public DbSet<Product> Products { get; set; } = default!;

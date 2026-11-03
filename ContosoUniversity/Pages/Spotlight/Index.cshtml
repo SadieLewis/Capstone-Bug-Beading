@@ -11,12 +11,14 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 text-center">
             <h2>Best Sellers</h2>
+            @if (User.IsInRole("Admin")){
             <a asp-page="/Spotlight/Add" asp-route-carousel="BestSellers" class="btn btn-success mb-3">
                 Add Products
             </a>
             <a asp-page="/Spotlight/Remove" asp-route-carousel="BestSellers" class="btn btn-danger mb-3">
                 Remove Products
             </a>
+            }
         </div>
     </div>
 </div>
@@ -81,12 +83,14 @@ else
     <div class="row justify-content-center">
         <div class="col-lg-6 text-center">
             <h2>On Sale</h2>
+            @if (User.IsInRole("Admin")){
             <a asp-page="/Spotlight/Add" asp-route-carousel="OnSale" class="btn btn-success mb-3">
                 Add Products
             </a>
             <a asp-page="/Spotlight/Remove" asp-route-carousel="OnSale" class="btn btn-danger mb-3">
                 Remove Products
             </a>
+            }
         </div>
     </div>
 </div>

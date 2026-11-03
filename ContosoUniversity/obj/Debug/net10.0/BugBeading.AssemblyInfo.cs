@@ -10,10 +10,12 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("3db5aa3e-ef97-4d22-84d2-c2b4a8f2d435")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BugBeading")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80260d75a0cce44c9b4d4ed4a1a9723a4dbc9933")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a9dfa7babc007af9e83946d87d8653c6b9aa149")]
 [assembly: System.Reflection.AssemblyProductAttribute("BugBeading")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BugBeading")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
