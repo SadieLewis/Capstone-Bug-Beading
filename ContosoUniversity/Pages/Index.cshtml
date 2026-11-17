@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<header class="py-5 bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/09/29/14/06/background-1702930_1280.jpg')">
+<header class="py-5 bg-image-full" data-track="home-hero" style="background-image: url('https://cdn.pixabay.com/photo/2016/09/29/14/06/background-1702930_1280.jpg')">
         <div class="text-center my-5">
-            <img class="img-fluid rounded-circle mb-4" src="https://i.etsystatic.com/67630125/r/isla/4733cc/88498415/isla_100x100.88498415_gvhazb4v.jpg" alt="Bug Beading Logo" />
+            <img class="img-fluid rounded-circle mb-4" src="https://i.etsystatic.com/67630125/r/isla/4733cc/88498415/isla_100x100.88498415_gvhazb4v.jpg" alt="Bug Beading Logo" data-track="brand-logo" />
             <h3 class="text-white fs-3">Bug Beading</h1>
         </div>
 </header>
@@ -18,9 +18,9 @@
                     <p>
                         View our collection of handcrafted pieces made with care and find the perfect piece that you love.
                     </p>
-                    <a class="btn btn-dark my-1" asp-area="" asp-page="/About" role="button">About our Company</a>
-                    <a class="btn btn-dark my-1" asp-area="" asp-page="/Inventory/Index" role="button">Browse our Inventory</a>
-                    <a class="btn btn-dark my-1" asp-area="" asp-page="/Spotlight/Index" role="button">View our Spotlight Items</a>
+                    <a class="btn btn-dark my-1" asp-area="" asp-page="/About" role="button" data-track="about-link">About our Company</a>
+                    <a class="btn btn-dark my-1" asp-area="" asp-page="/Inventory/Index" role="button" data-track="inventory-link">Browse our Inventory</a>
+                    <a class="btn btn-dark my-1" asp-area="" asp-page="/Spotlight/Index" role="button" data-track="spotlight-link">View our Spotlight Items</a>
                     <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-dark">
                         Admin? Login here:
                     </a>

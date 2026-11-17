@@ -49,11 +49,11 @@
             @foreach (var item in Model.Products)
             {
                 <div class="col-12 col-sm-6 col-lg-4">
-                <article class="product-card h-100">
+                <article class="product-card h-100" data-track="product-card" data-product-id="@item.ID">
                     <div class="product-card-image-container">
                         @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
                         {
-                            <img src="@item.ImageUrl" alt="@item.Name" class="product-card-image" />
+                            <img src="@item.ImageUrl" alt="@item.Name" class="product-card-image data-track-image" />
                         }
                         else
                         {
@@ -63,7 +63,7 @@
                         }
                     </div>
                     <div class="product-card-content">
-                        <h2 class="product-card-title">
+                        <h2 class="product-card-title" data-track="product-name">
                             @item.Name
                         </h2>
                         <p class="product-card-type">

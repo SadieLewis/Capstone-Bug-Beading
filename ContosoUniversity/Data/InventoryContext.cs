@@ -7,6 +7,8 @@ using BugBeading.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
+
+//It isn't recognizing user data???
 namespace BugBeading.Data
 {
     public class InventoryContext : IdentityDbContext<IdentityUser>
@@ -22,12 +24,17 @@ namespace BugBeading.Data
 
         public DbSet<Order> Orders { get; set; } = default!;
 
+        public DbSet<UserInteraction> UserInteractions { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Product>()
                 .ToTable(nameof(Product));
+
+            modelBuilder.Entity<UserInteraction>()
+                .ToTable("UserInteractions");
 
         }
     }

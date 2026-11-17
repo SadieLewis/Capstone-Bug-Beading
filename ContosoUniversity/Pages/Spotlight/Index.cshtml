@@ -40,10 +40,10 @@
             @for (int i = 0; i < Model.BestSellers.Count; i++)
             {
                 var product = Model.BestSellers[i];
-                <div class="carousel-item @(i == 0 ? "active" : "")">
+                <div class="carousel-item @(i == 0 ? "active" : "")" data-track="spotlight-product" data-product-id="@product.ID">
                     @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
                     {
-                        <img src="@product.ImageUrl" class="d-block w-100" alt="@product.Name">
+                        <img src="@product.ImageUrl" class="d-block w-100" alt="@product.Name" data-track-image>
                     }
                     else
                     {
@@ -52,7 +52,7 @@
                         </div>
                     }
                     <div class="carousel-caption d-none d-md-block">
-                        <h3>@product.Name</h3>
+                        <h3 data-track="product-name">@product.Name</h3>
                         <p>@product.Price.ToString("C")</p>
                     </div>
                 </div>
