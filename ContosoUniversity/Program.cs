@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+//Added for supervised learner
+using BugBeading.TrainingData;
 using BugBeading.Data;
 using Microsoft.AspNetCore.Identity;
 
@@ -10,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<InventoryContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("InventoryContextSQLite") ?? throw new InvalidOperationException("Connection string 'InventoryContext' not found.")));
+
+//Add Learner Data
+builder.Services.AddScoped<EngagementTrainingDataBuilder>();
+builder.Services.AddScoped<EngagementTrainingDataExporter>();
 
 // Added Identity config
 builder.Services
